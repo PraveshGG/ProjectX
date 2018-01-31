@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#8f5db7</color>
+    <color name="colorPrimaryDark">#59267c</color>
+    <!--<color name="colorAccent">#3e2049</color>-->
+    <color name="colorAccent">#e2d4e7</color>
+    <color name="projectX">#e1d755ca</color>
+    <color name="black">#ec434141</color>
+    <color name="white">#ffffff</color>
+    <color name="grey">#D3D3D3</color>
+    <color name="blackishWhite">#f6ccc3c3</color>
+
+
+
+</resources>

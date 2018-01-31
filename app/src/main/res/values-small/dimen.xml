@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="normalTextSize">16sp</dimen>
+    <dimen name="largeTextSize">20sp</dimen>
+    <dimen name="extraLargeTextSize">24sp</dimen>
+    <dimen name="forthFragmentpadding">24sp</dimen>
+    <dimen name="forthFragmentpaddingTop">24sp</dimen>
+    <dimen name="forthFragmentpaddingBottom">24sp</dimen>
+    <dimen name="forthFragmentpaddingLeft">24sp</dimen>
+    <dimen name="forthFragmentpaddingSize">24sp</dimen>
+</resources>

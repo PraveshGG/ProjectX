@@ -1,0 +1,22 @@
+<tabs>
+    <tab
+        id="@+id/tab_people"
+        icon="@drawable/bottombar_people"
+        barColorWhenSelected="#9c27b0"
+        title="People" />
+    <tab
+        id="@+id/tab_messages"
+        icon="@drawable/bottombar_messages"
+        barColorWhenSelected="#f06292"
+        title="Messages" />
+    <tab
+        id="@+id/tab_notifications"
+        icon="@drawable/bottombar_notifications"
+        barColorWhenSelected="#9575cd"
+        title="Notifications" />
+    <tab
+        id="@+id/tab_profile"
+        icon="@drawable/bottombar_profile"
+        barColorWhenSelected="#5c6bc0"
+        title="Profile" />
+</tabs>

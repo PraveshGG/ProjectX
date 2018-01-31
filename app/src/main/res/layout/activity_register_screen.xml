@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="6"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textColor="@color/projectX"
+        android:text="Enter your phone number"
+        android:layout_weight="0.8"
+        android:textSize="23sp"
+        android:gravity="center|bottom"
+        android:paddingBottom="5dp"
+        /> //0.8
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textColor="@color/black"
+        android:text="Make sure you can receive calls and sms to this number so that we can send you a code."
+        android:layout_weight="0.8"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        /> //1.6
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".6"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="11dp"
+            android:paddingRight="15dp"
+            android:id="@+id/spinner"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            /> //2.6
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".6"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <EditText
+            android:id="@+id/country_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
+            android:text="+977"
+            android:editable="false"
+            android:gravity="center"
+            />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:maxLength="10"/>
+    </LinearLayout> //3.2
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="0dp"
+        android:weightSum="3"
+        android:layout_weight=".7"
+        android:paddingTop="14dp">
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".7"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.6"
+            android:text="Continue"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:background="@drawable/button_custom_text_box"
+            android:gravity="center"
+            android:id="@+id/button2"
+            />
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".7"/>
+    </LinearLayout> //3.9
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.6"
+        android:gravity="center|bottom"
+        android:text="@string/grayCode"
+        android:paddingTop="85dp"/>
+
+</LinearLayout>

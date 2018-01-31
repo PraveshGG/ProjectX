@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/layout">
+
+
+                <ImageView
+                    android:id="@+id/header_cover_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="centerCrop"
+
+                    android:src="@drawable/nav_menu_header_bg"
+                    app:srcCompat="@drawable/nav_menu_header_bg" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:clickable="true"
+                    app:civ_border_width="3dp"
+                    app:civ_border_color="#FFFFFFFF"
+                    android:id="@+id/profile"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_below="@+id/header_cover_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-130dp"
+                    android:elevation="5dp"
+                    android:padding="20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/man" />
+
+                <RelativeLayout
+                    android:id="@+id/profile_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header_cover_image"
+                    android:background="#ebca0707"
+                    android:elevation="4dp"
+                    android:paddingBottom="24dp">
+
+
+                    <ImageView
+                        android:id="@+id/edit"
+
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="16dp"
+                        android:clickable="true"
+                        android:src="@android:drawable/ic_menu_edit" />
+
+                    <TextView
+                        android:layout_width="50sp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/edit"
+                        android:layout_alignStart="@+id/edit"
+                        android:layout_below="@+id/edit"
+
+                        android:gravity="center"
+                        android:text="EDIT"
+                        android:textColor="@android:color/white" />
+
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="70dp"
+                        android:textColor="#fff"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/designation"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="Birthplace"
+                        android:textColor="#fff"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/designation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="(Current Location)"
+                        android:textColor="#fff"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/forthFragmentpaddingTop"
+                android:paddingLeft="@dimen/forthFragmentpaddingTop"
+                >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <TextView
+                        style="@style/fourth_fragment_text_header"
+                        android:text="Full Name:" />
+
+                    <TextView
+                        android:id="@+id/fullname"
+                        style="@style/fourth_fragment_text_info"
+                        android:text="N/A"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <TextView
+                        style="@style/fourth_fragment_text_header"
+                        android:text="Age:"
+                        />
+
+                    <TextView
+                        android:id="@+id/age"
+                        style="@style/fourth_fragment_text_info"
+                        android:text="N/A"
+
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <TextView
+                        style="@style/fourth_fragment_text_header"
+                        android:text="Date of Birth(D.O.B):"
+                        />
+
+                    <TextView
+                        android:id="@+id/dob"
+                        style="@style/fourth_fragment_text_info"
+                        android:layout_height="wrap_content"
+                        android:text="N/A"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <TextView
+                        style="@style/fourth_fragment_text_header"
+                        android:text="Gender:"
+                        />
+
+                    <TextView
+                        android:id="@+id/gender"
+                        style="@style/fourth_fragment_text_info"
+                        android:text="N/A"
+
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <TextView
+                        style="@style/fourth_fragment_text_header"
+                        android:text="Status:"
+                        />
+
+                    <TextView
+                        android:id="@+id/status"
+                        style="@style/fourth_fragment_text_info"
+                        android:text="N/A"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <TextView
+                        style="@style/fourth_fragment_text_header"
+                        android:text="Education:"
+                        />
+
+                    <TextView
+                        android:id="@+id/education"
+                        style="@style/fourth_fragment_text_info"
+                        android:text="N/A"
+
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <TextView
+                        style="@style/fourth_fragment_text_header"
+
+                        android:textSize="@dimen/normalTextSize"
+                        android:text="Work:"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/work"
+                        style="@style/fourth_fragment_text_info"
+                        android:text="N/A" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <TextView
+                        style="@style/fourth_fragment_text_header"
+                        android:text="Birth Place:"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/birthPlace"
+                        style="@style/fourth_fragment_text_info"
+                        android:text="N/A" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <TextView
+                        style="@style/fourth_fragment_text_header"
+                        android:text="Current Location:"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/current_location"
+                        style="@style/fourth_fragment_text_info"
+                        android:text="N/A" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <TextView
+                        style="@style/fourth_fragment_text_header"
+                        android:textSize="@dimen/normalTextSize"
+                        android:text="Blood Type:"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/blood_type"
+                        style="@style/fourth_fragment_text_info"
+                        android:text="N/A" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <TextView
+                        style="@style/fourth_fragment_text_header"
+                        android:text="Additional Contacts:"
+                        />
+
+                    <TextView
+                        android:id="@+id/additonalContacts"
+                        style="@style/fourth_fragment_text_info"
+                        android:text="N/A"
+                        android:layout_gravity="center_vertical"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+</android.support.v4.widget.NestedScrollView>
