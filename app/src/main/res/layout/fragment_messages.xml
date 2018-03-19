@@ -1,14 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.projectx.MessagesFragment">
+    tools:context="com.example.android.projectx.Reminder.ViewReminderActivity"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_frag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="25dp"
+        app:srcCompat="@drawable/ic_add_24dp"
+        android:backgroundTint="#9c27b0"
+        android:visibility="visible" />
+    <ListView
+        android:id="@+id/reminder_view_list_frag"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="25sp"
-        android:text="@string/hello_messages_fragment" />
+        android:layout_height="match_parent">
+    </ListView>
+
 
 </FrameLayout>

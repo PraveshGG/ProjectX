@@ -1,6 +1,7 @@
 package com.example.android.projectx;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.android.projectx.HomeScreen.HomeActivity;
 import com.google.gson.Gson;
 
 import java.text.ParseException;
@@ -28,36 +30,37 @@ import java.util.Date;
 
 public class EditDescriptionActivity extends AppCompatActivity {
     ArrayList<String> relationshipList, educationList, bloodList, workList;
-    ArrayAdapter<String> arrayAdapter, educationArrayAdapter, bloodArrayAdapter,workAdapter;
-    Spinner spinner, educationSpinner, bloodSpinner,workSpinner;
+    ArrayAdapter<String> arrayAdapter, educationArrayAdapter, bloodArrayAdapter, workAdapter;
+    Spinner spinner, educationSpinner, bloodSpinner, workSpinner;
     TextView dob;
     Calendar calendar = Calendar.getInstance();
     SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
     Button submitButton;
     Date indates, outdate, Todaydate;
-    EditText firstName, middleName, lastName,agee, birthPlace, designation,additionalContacts;
+    EditText firstName, middleName, lastName, agee, birthPlace, designation, additionalContacts;
     RadioGroup gender;
-    RadioButton male, female;
-    String mmale,mfemale;
+    RadioButton male, female, other;
+    String mmale, mfemale;
     ModelUser user;
     String model;
-    int getEducationIndex=0,getRelationshipIndex=0,getWorkIndex=0,getBloodIndex=0;
+    int getEducationIndex = 0, getRelationshipIndex = 0, getWorkIndex = 0, getBloodIndex = 0;
+    SharedPreferences preferences;
 
-   SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         setContentView(R.layout.activity_edit_description);
 
-        preferences = getSharedPreferences("SP",MODE_PRIVATE);
+        preferences = getSharedPreferences("SP", Context.MODE_PRIVATE);
 
-        model = preferences.getString("models","");
+        model = preferences.getString("models", "");
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         agee = findViewById(R.id.age);
         firstName = findViewById(R.id.first_name);
-        middleName=findViewById(R.id.middle_name);
+        middleName = findViewById(R.id.middle_name);
         lastName = findViewById(R.id.last_name);
         birthPlace = findViewById(R.id.birthPlace);
         designation = findViewById(R.id.designation);
@@ -65,11 +68,12 @@ public class EditDescriptionActivity extends AppCompatActivity {
         male = findViewById(R.id.male);
         female = findViewById(R.id.female);
         gender = findViewById(R.id.gender);
+        other = findViewById(R.id.others);
 
         educationSpinner = findViewById(R.id.spinner2);
         spinner = findViewById(R.id.spinner);
         bloodSpinner = findViewById(R.id.spinner3);
-        workSpinner =findViewById(R.id.spinner4);
+        workSpinner = findViewById(R.id.spinner4);
 
         dob = findViewById(R.id.dateView);
         relationshipList = new ArrayList<>();
@@ -110,42 +114,45 @@ public class EditDescriptionActivity extends AppCompatActivity {
         workList.add("Employed");
         workList.add("Unemployed");
 
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,relationshipList);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, relationshipList);
         spinner.setAdapter(arrayAdapter);
 
         bloodArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, bloodList);
         bloodSpinner.setAdapter(bloodArrayAdapter);
 
-        workAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,workList);
+        workAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, workList);
         workSpinner.setAdapter(workAdapter);
 
         educationArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, educationList);
         educationSpinner.setAdapter(educationArrayAdapter);
 
-        gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
+        gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch(checkedId){
+                switch (checkedId) {
                     case R.id.male:
                         mmale = male.getText().toString();
-                        Log.d("fii", "onCheckedChanged: "+mmale);
+                        Log.d("fii", "onCheckedChanged: " + mmale);
 
                         // do operations specific to this selection
                         break;
                     case R.id.female:
-                        mmale =female.getText().toString();
-                        Log.d("fii", "onCheckedChanged: "+mmale);
+                        mmale = female.getText().toString();
+                        Log.d("fii", "onCheckedChanged: " + mmale);
 
                         // do operations specific to this selection
+                        break;
+
+                    case R.id.others:
+                        mmale = other.getText().toString();
                         break;
                 }
             }
         });
 
 
-        if(model==null||model==""){
+        if (model == null || model == "") {
 
-        }else {
+        } else {
             user = new Gson().fromJson(model, ModelUser.class);
             firstName.setText(user.getfName());
             middleName.setText(user.getmName());
@@ -158,35 +165,35 @@ public class EditDescriptionActivity extends AppCompatActivity {
             additionalContacts.setText(user.getAdditionalContacts());
 
             dob.setTextColor(getResources().getColor(R.color.colorAccent));
-            for(int i=0;i<bloodList.size();i++){
-                Log.d("tos", "onCreate: "+bloodList.get(i));
+            for (int i = 0; i < bloodList.size(); i++) {
+                Log.d("tos", "onCreate: " + bloodList.get(i));
                 String bloodGroup = String.valueOf(user.getBloodGroup());
-                if(bloodList.get(i).equalsIgnoreCase(bloodGroup)){
+                if (bloodList.get(i).equalsIgnoreCase(bloodGroup)) {
                     getBloodIndex = i;
                 }
             }
             bloodSpinner.setSelection(getBloodIndex);
 
-            for(int i=0;i<relationshipList.size();i++){
+            for (int i = 0; i < relationshipList.size(); i++) {
                 String relationshipGroup = String.valueOf(user.getStatus());
-                if(relationshipList.get(i).equalsIgnoreCase(relationshipGroup)){
+                if (relationshipList.get(i).equalsIgnoreCase(relationshipGroup)) {
                     getRelationshipIndex = i;
                 }
             }
             spinner.setSelection(getRelationshipIndex);
 
-            for(int i=0;i<educationList.size();i++){
+            for (int i = 0; i < educationList.size(); i++) {
                 String educationGroup = String.valueOf(user.getEducation());
-                if(educationList.get(i).equalsIgnoreCase(educationGroup)){
+                if (educationList.get(i).equalsIgnoreCase(educationGroup)) {
                     getEducationIndex = i;
                 }
             }
             educationSpinner.setSelection(getEducationIndex);
 
 
-            for(int i=0;i<workList.size();i++){
+            for (int i = 0; i < workList.size(); i++) {
                 String workGroup = String.valueOf(user.getWork());
-                if(workList.get(i).equalsIgnoreCase(workGroup)){
+                if (workList.get(i).equalsIgnoreCase(workGroup)) {
                     getWorkIndex = i;
                 }
             }
@@ -194,16 +201,14 @@ public class EditDescriptionActivity extends AppCompatActivity {
             );
 
 
-            if(String.valueOf(user.getGender()).equalsIgnoreCase("male")){
+            if (String.valueOf(user.getGender()).equalsIgnoreCase("male")) {
                 gender.check(male.getId());
-            }else {
+            } else if (String.valueOf(user.getGender()).equalsIgnoreCase("female")) {
                 gender.check(female.getId());
+            } else {
+                gender.check(other.getId());
             }
-
-
         }
-
-
 
         Todaydate = new Date();
         calendar.add(Calendar.YEAR, -14);
@@ -222,7 +227,7 @@ public class EditDescriptionActivity extends AppCompatActivity {
 
                     int age = Todaydate.getYear() - indates.getYear();
 
-                    if (Todaydate.getYear() < indates.getYear()){
+                    if (Todaydate.getYear() < indates.getYear()) {
                         age--;
                     }
 
@@ -238,15 +243,12 @@ public class EditDescriptionActivity extends AppCompatActivity {
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               DatePickerDialog dialog =  new DatePickerDialog(EditDescriptionActivity.this, indate, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                DatePickerDialog dialog = new DatePickerDialog(EditDescriptionActivity.this, indate, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH));
-               dialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 441796964000L);
-               dialog.show();
+                dialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 441796964000L);
+                dialog.show();
             }
         });
-
-
-
 
 
         submitButton = findViewById(R.id.submitButton);
@@ -255,19 +257,21 @@ public class EditDescriptionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                ModelUser modelUser = new ModelUser(firstName.getText().toString(),middleName.getText().toString(),lastName.getText().toString(),
-                        dob.getText().toString(),agee.getText().toString(),birthPlace.getText().toString(),designation.getText().toString(),
-                        additionalContacts.getText().toString(),mmale,spinner.getSelectedItem().toString(),
-                        educationSpinner.getSelectedItem().toString(), bloodSpinner.getSelectedItem().toString(),workSpinner.getSelectedItem().toString());
+                ModelUser modelUser = new ModelUser(firstName.getText().toString(), middleName.getText().toString(), lastName.getText().toString(),
+                        dob.getText().toString(), agee.getText().toString(), birthPlace.getText().toString(), designation.getText().toString(),
+                        additionalContacts.getText().toString(), mmale, spinner.getSelectedItem().toString(),
+                        educationSpinner.getSelectedItem().toString(), bloodSpinner.getSelectedItem().toString(), workSpinner.getSelectedItem().toString());
 
 
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("models",new Gson().toJson(modelUser));
+                editor.putString("models", new Gson().toJson(modelUser));
+                editor.putString("firstName", firstName.getText().toString());
                 editor.commit();
 
-                Intent i =new Intent(EditDescriptionActivity.this,HomeActivity.class);
-
-                i.putExtra("fragmentid",3);
+                Intent i = new Intent(EditDescriptionActivity.this, HomeActivity.class);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                i.putExtra("submitFromEditDescriptionToFragment4", 5);
+                i.putExtra("firstName", firstName.getText().toString());
 //                i.putExtra("model",new Gson().toJson(modelUser));
                 startActivity(i);
             }
@@ -278,7 +282,12 @@ public class EditDescriptionActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, WelcomeActivity.class));
+        startActivity(new Intent(this, HomeActivity.class));
+        Intent i = new Intent(EditDescriptionActivity.this, HomeActivity.class);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        i.putExtra("backPressedFromEditDescriptionToFragment4", 5);
+//                i.putExtra("model",new Gson().toJson(modelUser));
+        startActivity(i);
         super.onBackPressed();
     }
 }

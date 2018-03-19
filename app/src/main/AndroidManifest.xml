@@ -7,32 +7,81 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="false"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_menu_gallery" />
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <!-- [END fcm_default_icon] -->
+        <!-- [START fcm_default_channel] -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="Heellloooo" />
+        <!-- [END fcm_default_channel] -->
         <activity
-            android:name=".WelcomeActivity"
-            android:screenOrientation="portrait">
+            android:name=".WelcomeRegister.WelcomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WelcomeRegister.ScreenRegister"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomeScreen.HomeActivity"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity android:name=".EditDescriptionActivity" />
+        <activity android:name=".WelcomeRegister.VerificationActivity" />
+        <activity
+            android:name=".Splash.SplashActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ScreenRegister"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".HomeActivity"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".EditDescriptionActivity" />
-        <activity android:name=".VerificationActivity"></activity>
+        <activity android:name=".Reminder.SetReminderActivity" />
+
+        <receiver android:name=".TimeAlarmActivity" />
+
+        <activity android:name=".Reminder.ViewReminderActivity" />
+        <activity android:name=".ViewSpecificReminderActivity" />
+        <!--<activity-->
+            <!--android:name=".LoginActivity"-->
+            <!--android:label="@string/title_activity_login" />-->
+        <activity android:name=".SettingsActivity"></activity>
+
+        <service android:name=".pushNotifications.MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+
+        </service>
+        <service android:name=".pushNotifications.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

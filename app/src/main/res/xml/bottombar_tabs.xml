@@ -5,18 +5,18 @@
         barColorWhenSelected="#9c27b0"
         title="People" />
     <tab
-        id="@+id/tab_messages"
+        id="@+id/tab_reminders"
         icon="@drawable/bottombar_messages"
-        barColorWhenSelected="#f06292"
-        title="Messages" />
+        barColorWhenSelected="#9c27b0"
+        title="Reminders" />
     <tab
         id="@+id/tab_notifications"
         icon="@drawable/bottombar_notifications"
-        barColorWhenSelected="#9575cd"
+        barColorWhenSelected="#9c27b0"
         title="Notifications" />
     <tab
         id="@+id/tab_profile"
         icon="@drawable/bottombar_profile"
-        barColorWhenSelected="#5c6bc0"
+        barColorWhenSelected="#9c27b0"
         title="Profile" />
 </tabs>

@@ -1,4 +1,4 @@
-package com.example.android.projectx;
+package com.example.android.projectx.Retrofit;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

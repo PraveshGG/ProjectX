@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    //text size
     <dimen name="smallTextSize">18sp</dimen>
-    <dimen name="normalTextSize">19sp</dimen>
+    <dimen name="normalTextSize">20sp</dimen>
     <dimen name="largeTextSize">22sp</dimen>
     <dimen name="extraLargeTextSize">26sp</dimen>
-    <dimen name="forthFragmentpadding">26sp</dimen>
-    <dimen name="forthFragmentpaddingTop">26sp</dimen>
-    <dimen name="forthFragmentpaddingBottom">26sp</dimen>
-    <dimen name="forthFragmentpaddingLeft">26sp</dimen>
-    <dimen name="forthFragmentpaddingSize">26sp</dimen>
 
+
+    //padding
+    <dimen name="forthFragmentpadding">26dp</dimen>
+    <dimen name="forthFragmentpaddingTop">26dp</dimen>
+    <dimen name="forthFragmentpaddingBottom">26dp</dimen>
+    <dimen name="forthFragmentpaddingLeft">26dp</dimen>
+    <dimen name="forthFragmentpaddingSize">26dp</dimen>
+
+
+
+    <dimen name="activity_horizontal_margin">26dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="icon_top_margin">24dp</dimen>
+    <dimen name="icon_bottom_margin">24dp</dimen>
+    <dimen name="title_bottom_margin">16dp</dimen>
+    <dimen name="field_width_standard">160dp</dimen>
+
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>
