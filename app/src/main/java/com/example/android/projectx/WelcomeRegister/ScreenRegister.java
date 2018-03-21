@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.android.projectx.HomeScreen.HomeActivity;
 import com.example.android.projectx.Retrofit.ApiClient;
 import com.example.android.projectx.Retrofit.ApiService;
 import com.example.android.projectx.ModelClass;
@@ -84,7 +85,7 @@ public class ScreenRegister extends AppCompatActivity {
                             "Yes",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Intent i = new Intent(getApplicationContext(), VerificationActivity.class);
+                                    Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                                     i.putExtra("phoneNumber", finalPhoneNumber);
                                     startActivity(i);
                                     dialog.cancel();

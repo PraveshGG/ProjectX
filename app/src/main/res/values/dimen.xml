@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
+    //circular image in reminder fragment...
+    <dimen name="listviewHeight"></dimen>
+
+    
+    
+    //custom width
+    <dimen name="verySmallWidth"> 90dp</dimen>
+    <dimen name="SmallWidth"> 120dp</dimen>
+    <dimen name="MediumWidth">150dp</dimen>
+    <dimen name="LargeWidth">180dp</dimen>
+    //custom height
+    <dimen name="verySmallHeight">40dp</dimen>
+    <dimen name="SmallHeight">60dp</dimen>
+    <dimen name="MediumHeight">90dp</dimen>
+    <dimen name="LargeHeight">150dp</dimen>
+
+    //padding
+    <dimen name="smallPadding">5dp</dimen>
+    <dimen name="mediumPadding">8dp</dimen>
+    <dimen name="largePadding">12dp</dimen>
+    <dimen name="extraLargePadding">18dp</dimen>
+
+
+
     //text size
     <dimen name="smallTextSize">18sp</dimen>
     <dimen name="normalTextSize">20sp</dimen>

@@ -40,7 +40,7 @@
 
     <style name="fourth_fragment_text_header" >
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">@dimen/normalTextSize</item>
+        <item name="android:textSize">@dimen/_16ssp</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">.9</item>
@@ -50,7 +50,7 @@
     </style>
     <style name="fourth_fragment_text_info" >
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">@dimen/smallTextSize</item>
+        <item name="android:textSize">@dimen/_15ssp</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1.1</item>
@@ -61,12 +61,12 @@
     </style>
     <style name="edit_description_text_header" >
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">@dimen/normalTextSize</item>
+        <item name="android:textSize">@dimen/_15ssp</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">.9</item>
         <item name="android:textColor">#292929</item>
-        <item name="android:paddingTop">13dp</item>
+        <item name="android:paddingTop">@dimen/_9sdp</item>
 
     </style>
     <!-- Activity with no Title -->
@@ -108,17 +108,23 @@
     </style>
 
     <style name="settings_Style">
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
-
-        <item name="android:paddingLeft">5dp</item>
-        <item name="android:paddingRight">5dp</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginLeft">@dimen/_7sdp</item>
+        <item name="android:layout_marginRight">@dimen/_7sdp</item>
+        <item name="android:layout_marginBottom">@dimen/_3sdp</item>
+        <item name="android:paddingLeft">@dimen/_3sdp</item>
+        <item name="android:paddingRight">@dimen/_3sdp</item>
+        <item name="android:textSize">@dimen/_14ssp</item>
 
 
     </style>
 
+    <style name="style_settings_header">
+        <item name="android:paddingLeft">@dimen/_7sdp</item>
+        <item name="android:paddingRight">@dimen/_7sdp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/_15sdp</item>
+        <item name="android:textColor">#ba68c8</item>
+    </style>
     <style name="divider_style">
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>

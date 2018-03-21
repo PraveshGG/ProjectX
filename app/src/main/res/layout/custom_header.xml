@@ -8,10 +8,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/totalContacts"
-        android:paddingLeft="15dp"
+        android:paddingLeft="@dimen/_9sdp"
         android:textColor="@color/black"
         tools:text="aaa"
-        android:textSize="18sp"
+        android:textSize="@dimen/_16ssp"
 
         />
 </LinearLayout>

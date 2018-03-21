@@ -15,100 +15,133 @@
             android:orientation="vertical"
             >
 
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/layout">
-
-
+                android:id="@+id/layout"
+                >
                 <ImageView
                     android:id="@+id/header_cover_image"
                     android:layout_width="match_parent"
-                    android:layout_height="350dp"
+                    android:layout_height="@dimen/_250sdp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/colorful_pencils" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_250sdp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="42dp"
-                    android:clickable="true"
-                    android:elevation="5dp"
-                    android:padding="20dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/man"
-                    app:civ_border_color="#FFFFFFFF"
-                    app:civ_border_width="3dp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.7"
+                        android:weightSum="4"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/_32ssp"
+                        android:layout_marginTop="@dimen/_5sdp">
 
-                <ImageView
-                    android:id="@+id/edit"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_above="@+id/textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginEnd="13dp"
-                    android:clickable="true"
-                    android:src="@android:drawable/ic_menu_edit" />
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2.2"
+                            android:layout_gravity="center"
+                            android:clickable="true"
+                            android:elevation="5dp"
+                            android:padding="@dimen/_5sdp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/man"
+                            app:civ_border_color="#FFFFFFFF"
+                            app:civ_border_width="3dp" />
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight=".8"
+                            android:gravity="center"
+                            android:fontFamily="@font/new_walt_disney"
+                            android:textColor="#fff"
+                            android:textSize="@dimen/_30ssp"
+                            android:textStyle="bold"
+                            tools:text="Pravesh Giri"/>
+                        <TextView
+                            android:id="@+id/location"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight=".5"
+                            android:gravity="center"
+                            android:layout_below="@+id/designation"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/text_birth_place"
+                            android:textColor="#fff"
+                            android:textSize="@dimen/_13ssp" />
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="50sp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/profile"
-                    android:layout_alignEnd="@+id/edit"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
-                    android:text="@string/text_edit"
-                    android:textColor="@android:color/white" />
+                        <TextView
+                            android:id="@+id/designation"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:gravity="center"
+                            android:layout_weight=".5"
+                            android:layout_below="@+id/name"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/text_current_location"
+                            android:textColor="#fff"
+                            android:textSize="@dimen/_15ssp" />
+
+                    </LinearLayout>
 
 
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/textView"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="26dp"
-                    android:fontFamily="@font/new_walt_disney"
-                    android:textColor="#fff"
-                    android:textSize="45sp"
-                    android:textStyle="bold"
-                    tools:text="Pravesh Giri"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".3"
+                        android:weightSum="3"
+                        android:orientation="vertical">
+                        <android.support.v4.widget.Space
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            />
 
-                <TextView
-                    android:id="@+id/location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/designation"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/text_birth_place"
-                    android:textColor="#fff"
-                    android:textSize="16sp" />
+                        <ImageView
+                            android:id="@+id/edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight=".5"
+                            android:clickable="true"
+                            android:layout_gravity="clip_horizontal"
+                            android:src="@android:drawable/ic_menu_edit" />
 
-                <TextView
-                    android:id="@+id/designation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/name"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/text_current_location"
-                    android:textColor="#fff"
-                    android:textSize="18sp" />
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight=".5"
+                            android:textSize="@dimen/_14ssp"
+                            android:gravity="center"
+                            android:text="@string/text_edit"
+                            android:textColor="@android:color/white" />
+                        <android.support.v4.widget.Space
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            />
+                    </LinearLayout>
 
-            </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/forthFragmentpaddingTop"
-                android:paddingLeft="@dimen/forthFragmentpaddingTop"
+                android:paddingLeft="@dimen/_20sdp"
+                android:paddingTop="@dimen/_5sdp"
                 >
 
 
@@ -246,8 +279,6 @@
 
                     <TextView
                         style="@style/fourth_fragment_text_header"
-
-                        android:textSize="@dimen/normalTextSize"
                         android:text="Work:"
 
                         />
@@ -307,7 +338,6 @@
 
                     <TextView
                         style="@style/fourth_fragment_text_header"
-                        android:textSize="@dimen/normalTextSize"
                         android:text="@string/text_blood_type"
 
                         />

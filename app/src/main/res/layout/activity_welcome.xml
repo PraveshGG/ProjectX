@@ -2,82 +2,81 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="6">
 
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="30dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="@string/projectX"
         android:textAlignment="center"
+        android:gravity="center"
         android:textAllCaps="true"
         android:textColor="@color/projectX"
-        android:textSize="20sp"/>
+        android:textSize="@dimen/_16ssp"/>
         <!--android:textStyle="bold" />-->
 
 
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="40dp"
-        android:text="@string/text_welcome"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:src="@drawable/welcome"
+        android:padding="@dimen/_16sdp"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:paddingBottom="35dp"
-        android:textSize="40sp" />
+        android:textColor="@color/black" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1.2"
         android:layout_gravity="center_horizontal"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
         android:text="@string/text_app_description"
-        android:textAlignment="center"
+android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="18sp" />
+        android:textSize="@dimen/_17ssp" />
 
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="80dp"
+        android:layout_height="0dp"
+        android:layout_weight=".8"
         android:text='@string/text_app_terms_and_policies'
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="@dimen/_12ssp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
-        android:text="@string/termsAndPolicies"
-        android:textAlignment="center" />
+
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="0dp"
+    android:layout_weight="1"
     android:orientation="horizontal"
     android:weightSum="3">
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:text=""/>
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_weight=".8"
         android:background="@drawable/button_custom_text_box"
         android:text="Continue"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="@dimen/_20ssp"
         android:textAllCaps="false"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:text=""/>
 
 </LinearLayout>
@@ -90,9 +89,11 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center|bottom"
         android:text="@string/grayCode"
-        android:paddingTop="85dp"/>
+        android:textSize="@dimen/_12ssp"
+        />
 
 </LinearLayout>

@@ -14,9 +14,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="25dp"
-        app:srcCompat="@drawable/ic_done_black_24dp"
+        app:srcCompat="@drawable/ic_done_white_24dp"
         android:backgroundTint="#9c27b0"
         android:visibility="invisible"
+        app:fabSize="normal"
         />
     <LinearLayout
         android:layout_width="match_parent"

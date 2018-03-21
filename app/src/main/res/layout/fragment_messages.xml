@@ -12,10 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="25dp"
+        android:layout_margin="@dimen/_19sdp"
         app:srcCompat="@drawable/ic_add_24dp"
         android:backgroundTint="#9c27b0"
-        android:visibility="visible" />
+        android:visibility="visible"
+        app:fabSize="normal"/>
     <ListView
         android:id="@+id/reminder_view_list_frag"
         android:layout_width="match_parent"

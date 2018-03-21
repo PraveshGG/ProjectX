@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -26,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.zip.Inflater;
 
 
 public class EditDescriptionActivity extends AppCompatActivity {
@@ -51,6 +54,8 @@ public class EditDescriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         setContentView(R.layout.activity_edit_description);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         preferences = getSharedPreferences("SP", Context.MODE_PRIVATE);
 
@@ -289,5 +294,27 @@ public class EditDescriptionActivity extends AppCompatActivity {
 //                i.putExtra("model",new Gson().toJson(modelUser));
         startActivity(i);
         super.onBackPressed();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if(id==android.R.id.home){
+            startActivity(new Intent(this, HomeActivity.class));
+            Intent i = new Intent(EditDescriptionActivity.this, HomeActivity.class);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            i.putExtra("backPressedFromEditDescriptionToFragment4", 5);
+//                i.putExtra("model",new Gson().toJson(modelUser));
+            startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

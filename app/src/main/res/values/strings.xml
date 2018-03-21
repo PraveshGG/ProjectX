@@ -20,15 +20,15 @@
 
     //welcome_activity
     <string name="text_welcome">Welcome!</string>
-    <string name="text_app_description">An Unique way to meet and greet your x app friends instantly</string>
-    <string name="text_app_terms_and_policies">By tapping \"Continue\" you agree to our</string>
+    <string name="text_app_description">An Unique way to meet and greet your x app friends instantly.</string>
+    <string name="text_app_terms_and_policies">By tapping \"Continue\" you agree to our \n Terms and Policies.</string>
 
     //register screen activity
     <string name="text_app_enter_your_phone_number">Enter your phone number</string>
     <string name="text_app_description2">Make sure you can receive calls and sms \n to this number so that we can send you a code.</string>
 
     //verification activity
-    <string name="text_not_logged_in">You are not logged in!</string>
+    <string name="text_not_logged_in">You are not logged in !</string>
 
 
     <string name="text_edit">Edit</string>
@@ -50,7 +50,7 @@
     <string name="text_work">Work:</string>
     <string name="text_blood_type">Blood Type:</string>
     <string name="text_additional_contacts">Additional Contacts:</string>
-    <string name="text_enter_your_details">Enter Your Details...</string>
+    <string name="text_enter_your_details">Enter Your Credentials</string>
     <string name="text_first_name">First Name:</string>
     <string name="text_middle_name">Middle Name:</string>
     <string name="text_last_name">Last Name:</string>
