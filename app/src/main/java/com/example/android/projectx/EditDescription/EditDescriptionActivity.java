@@ -1,4 +1,4 @@
-package com.example.android.projectx;
+package com.example.android.projectx.EditDescription;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.android.projectx.HomeScreen.HomeActivity;
+import com.example.android.projectx.R;
 import com.google.gson.Gson;
 
 import java.text.ParseException;
@@ -28,7 +29,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.zip.Inflater;
 
 
 public class EditDescriptionActivity extends AppCompatActivity {

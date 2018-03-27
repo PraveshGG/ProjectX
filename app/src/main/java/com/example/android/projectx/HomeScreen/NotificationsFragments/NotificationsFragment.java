@@ -67,6 +67,7 @@ public class NotificationsFragment extends Fragment  {
 
 
          final ProgressDialog dialog = new ProgressDialog(getContext());
+        dialog.setMessage("Loading Notifications...");
          dialog.show();
          ultimateRecyclerView= view.findViewById(R.id.ultimate_recycler_view);
         ultimateRecyclerView.setHasFixedSize(false);

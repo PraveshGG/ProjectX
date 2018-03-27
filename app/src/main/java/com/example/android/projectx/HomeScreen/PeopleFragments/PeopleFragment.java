@@ -20,7 +20,6 @@ import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.util.TypedValue;
@@ -30,9 +29,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.CheckBox;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,14 +38,13 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.example.android.projectx.CheckedListModel;
-import com.example.android.projectx.CustomModel.UserContactModel;
 import com.example.android.projectx.HomeScreen.HomeActivity;
-import com.example.android.projectx.MyClass;
-import com.example.android.projectx.MyClass1;
+import com.example.android.projectx.HomeScreen.PeopleFragments.PeopleModel.CheckedListModel;
+import com.example.android.projectx.HomeScreen.PeopleFragments.PeopleModel.MyClass;
+import com.example.android.projectx.HomeScreen.PeopleFragments.PeopleModel.MyClass1;
+import com.example.android.projectx.HomeScreen.PeopleFragments.PeopleModel.UserContactModel;
 import com.example.android.projectx.R;
 import com.example.android.projectx.Reminder.SetReminderActivity;
-import com.example.android.projectx.Reminder.ViewReminderActivity;
 import com.example.android.projectx.Retrofit.ApiBase;
 import com.example.android.projectx.Retrofit.ApiService;
 import com.google.gson.Gson;
@@ -121,10 +116,12 @@ public class PeopleFragment extends Fragment {
         tv = myHeader.findViewById(R.id.totalContacts);
         listView = view.findViewById(R.id.listView);
         floatingActionButton = view.findViewById(R.id.fab);
-//        dialog = new ProgressDialog(getContext());
-//        dialog.setCancelable(false);
-//        dialog.setMessage("Loading.....");
-//        dialog.show();
+
+
+        dialog = new ProgressDialog(getContext());
+        dialog.setCancelable(false);
+        dialog.setMessage("Loading.....");
+        dialog.show();
 
 
         listView.addHeaderView(myHeader, null, false);
@@ -168,6 +165,9 @@ public class PeopleFragment extends Fragment {
 
         listView.setMenuCreator(swipeCreator());
         swipeMenuItemClick(a);
+
+        dialog.dismiss();
+
         for (int i = 0; i < a.size(); i++) {
 
             aNull.add(new MyClass1(a.get(i).getName(), a.get(i).getPhoneNumber().toString()));
@@ -194,7 +194,6 @@ public class PeopleFragment extends Fragment {
                         userContactModel.add(new UserContactModel(3, a.get(i).getName().toString(), a.get(i).getPhoneNumber().toString(), 0));
                     }
                     addContactsToServer(userContactModel);
-
 
                     String modelString = new Gson().toJson(aNull);
                     editor.putString("ms", modelString);
@@ -682,14 +681,14 @@ public class PeopleFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_search:
                 return true;
-
-            case R.id.action_set_reminder:
-                getClick();
-                return true;
-
-            case R.id.action_view_reminder:
-                Intent toViewReminderIntent = new Intent(getContext(), ViewReminderActivity.class);
-                startActivity(toViewReminderIntent);
+//
+//            case R.id.action_set_reminder:
+//                getClick();
+//                return true;
+//
+//            case R.id.action_view_reminder:
+//                Intent toViewReminderIntent = new Intent(getContext(), ViewReminderActivity.class);
+//                startActivity(toViewReminderIntent);
             default:
                 return super.onOptionsItemSelected(item);
         }

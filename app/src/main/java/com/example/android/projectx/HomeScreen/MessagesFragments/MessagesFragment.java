@@ -1,4 +1,4 @@
-package com.example.android.projectx.HomeScreen;
+package com.example.android.projectx.HomeScreen.MessagesFragments;
 
 
 import android.app.ProgressDialog;
@@ -13,7 +13,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.util.TimeUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,29 +22,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
-import com.amulyakhare.textdrawable.util.ColorGenerator;
-import com.example.android.projectx.ModelUser;
+import com.example.android.projectx.HomeScreen.HomeActivity;
+import com.example.android.projectx.EditDescription.ModelUser;
 import com.example.android.projectx.R;
-import com.example.android.projectx.Reminder.ReminderAdapter;
 import com.example.android.projectx.Reminder.ReminderTagModel;
 import com.example.android.projectx.Reminder.SetReminderActivity;
-import com.example.android.projectx.Reminder.ViewReminderActivity;
-import com.example.android.projectx.Splash.SplashActivity;
-import com.example.android.projectx.ViewSpecificReminderActivity;
+import com.example.android.projectx.Reminder.ViewSpecificReminderActivity;
 import com.example.android.projectx.WelcomeRegister.SaveReminderModel;
-import com.example.android.projectx.WelcomeRegister.WelcomeActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.android.projectx.HomeScreen.PeopleFragments.PeopleFragment.drawableToBitmap;
 
 
 /**
@@ -82,7 +74,7 @@ public class MessagesFragment extends Fragment {
         // Inflate the layout for this fragment
         view =inflater.inflate(R.layout.fragment_messages, container, false);
         final ProgressDialog dialog = new ProgressDialog(getContext());
-        dialog.setMessage("LOading");
+        dialog.setMessage("Loading");
         dialog.setCancelable(true);
         dialog.show();
 
@@ -132,8 +124,6 @@ public class MessagesFragment extends Fragment {
                 dateLocationList.add(reminderList.get(i).getTvReminder1());
             }
             taggedReminderList = new ArrayList<>();
-
-
 
             numOfReminders.setText("Total Reminders: " + reminderList.size());
             reminderAdapter = new ReminderAdapter(getActivity(), reminderList, dateLocationList);
@@ -353,6 +343,7 @@ public class MessagesFragment extends Fragment {
 
                 startActivity(new Intent(getContext(), ViewSpecificReminderActivity.class)
                         .putExtra("view", new Gson().toJson(reminderList.get(position))));
+
             }
         });
 

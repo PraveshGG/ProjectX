@@ -23,14 +23,16 @@
         android:required="true" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="false"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:replace="allowBackup">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDy2tWtqdXgL6fOQkSaq15xaokZnGplmWo" />
@@ -66,9 +68,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".EditDescriptionActivity" />
+        <activity android:name=".EditDescription.EditDescriptionActivity" />
         <activity android:name=".WelcomeRegister.VerificationActivity" />
-        <activity android:name=".MapsActivity" />
+        <activity android:name=".Reminder.MapsActivity" />
         <activity
             android:name=".Splash.SplashActivity"
             android:noHistory="true">
@@ -82,17 +84,17 @@
             android:name=".Reminder.SetReminderActivity"
             android:label="Set Reminder" />
 
-        <receiver android:name=".TimeAlarmActivity" />
+        <receiver android:name=".Reminder.TimeAlarmActivity" />
 
         <activity android:name=".Reminder.ViewReminderActivity" />
         <activity
-            android:name=".ViewSpecificReminderActivity"
+            android:name=".Reminder.ViewSpecificReminderActivity"
             android:label="View Reminder" />
         <!-- <activity -->
         <!-- android:name=".LoginActivity" -->
         <!-- android:label="@string/title_activity_login" /> -->
         <activity
-            android:name=".SettingsActivity"
+            android:name=".Settings.SettingsActivity"
             android:screenOrientation="portrait" />
 
         <service android:name=".pushNotifications.MyFirebaseInstanceIdService">
@@ -106,7 +108,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".WelcomeRegister.testAPI.testActivityAPI" ></activity>
     </application>
 
 </manifest>

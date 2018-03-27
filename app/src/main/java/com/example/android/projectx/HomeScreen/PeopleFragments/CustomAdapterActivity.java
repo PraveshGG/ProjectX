@@ -2,18 +2,11 @@ package com.example.android.projectx.HomeScreen.PeopleFragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,33 +16,22 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
-import com.example.android.projectx.CustomModel.UserContactModel;
-import com.example.android.projectx.MyClass;
+import com.example.android.projectx.HomeScreen.PeopleFragments.PeopleModel.MyClass;
 import com.example.android.projectx.R;
-import com.example.android.projectx.Scrollable;
-import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 
 /**
  * Created by Pravesh on 1/20/2018.
@@ -156,27 +138,24 @@ public class CustomAdapterActivity extends ArrayAdapter<MyClass> implements Sect
             });
 
 
-
-           if(check.equalsIgnoreCase("no")){
-               final ViewHolder finalViewHolder = viewHolder;
-               final View finalConvertView = convertView;
-               finalConvertView.setOnClickListener(new View.OnClickListener() {
-                   @Override
-                   public void onClick(View v) {
+            if (check.equalsIgnoreCase("no")) {
+                final ViewHolder finalViewHolder = viewHolder;
+                final View finalConvertView = convertView;
+                finalConvertView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
 //                       finalConvertView.setFocusable(true);
-                       finalConvertView.setFocusableInTouchMode(true);
+                        finalConvertView.setFocusableInTouchMode(true);
 
-                        if(finalViewHolder.checkBox.isChecked()){
+                        if (finalViewHolder.checkBox.isChecked()) {
                             finalViewHolder.checkBox.setChecked(false);
-                        }else {
+                        } else {
                             finalViewHolder.checkBox.setChecked(true);
                         }
-                   }
-               });
-           }
-
-
+                    }
+                });
+            }
 
 
             convertView.setTag(viewHolder);
@@ -197,7 +176,7 @@ public class CustomAdapterActivity extends ArrayAdapter<MyClass> implements Sect
                     viewHolder.contactsImage.setImageDrawable(d);
                 } else {
                     firstLetter = myList.get(position).getName().substring(0, 1);
-                    Log.d("asjdfa", "getView: "+firstLetter);
+                    Log.d("asjdfa", "getView: " + firstLetter);
                     ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
 
                     int color = generator.getColor(firstLetter);

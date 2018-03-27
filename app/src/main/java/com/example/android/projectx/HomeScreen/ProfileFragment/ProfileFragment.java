@@ -16,9 +16,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.projectx.EditDescriptionActivity;
+import com.example.android.projectx.EditDescription.EditDescriptionActivity;
 import com.example.android.projectx.HomeScreen.HomeActivity;
-import com.example.android.projectx.ModelUser;
+import com.example.android.projectx.EditDescription.ModelUser;
 import com.example.android.projectx.R;
 import com.google.gson.Gson;
 

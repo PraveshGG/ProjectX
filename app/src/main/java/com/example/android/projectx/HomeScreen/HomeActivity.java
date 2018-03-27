@@ -24,13 +24,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.projectx.EditDescriptionActivity;
+import com.example.android.projectx.EditDescription.EditDescriptionActivity;
+import com.example.android.projectx.HomeScreen.MessagesFragments.MessagesFragment;
 import com.example.android.projectx.HomeScreen.NotificationsFragments.NotificationsFragment;
 import com.example.android.projectx.HomeScreen.ProfileFragment.ProfileFragment;
-import com.example.android.projectx.ModelUser;
+import com.example.android.projectx.EditDescription.ModelUser;
 import com.example.android.projectx.HomeScreen.PeopleFragments.PeopleFragment;
 import com.example.android.projectx.R;
-import com.example.android.projectx.SettingsActivity;
+import com.example.android.projectx.Settings.SettingsActivity;
 import com.example.android.projectx.WelcomeRegister.WelcomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
@@ -392,6 +393,7 @@ public class HomeActivity extends AppCompatActivity
             preferences.edit().clear().commit();
             File file = new File("/storage/emulated/0/", "profilePic.png");
             file.delete();
+
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
             startActivity(intent);
