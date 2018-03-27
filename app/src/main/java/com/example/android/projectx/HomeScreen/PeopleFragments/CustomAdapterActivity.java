@@ -160,11 +160,11 @@ public class CustomAdapterActivity extends ArrayAdapter<MyClass> implements Sect
            if(check.equalsIgnoreCase("no")){
                final ViewHolder finalViewHolder = viewHolder;
                final View finalConvertView = convertView;
-               convertView.setOnClickListener(new View.OnClickListener() {
+               finalConvertView.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
 
-                       finalConvertView.setFocusable(true);
+//                       finalConvertView.setFocusable(true);
                        finalConvertView.setFocusableInTouchMode(true);
 
                         if(finalViewHolder.checkBox.isChecked()){

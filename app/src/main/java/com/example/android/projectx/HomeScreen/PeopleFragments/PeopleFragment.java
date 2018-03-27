@@ -126,6 +126,7 @@ public class PeopleFragment extends Fragment {
 //        dialog.setMessage("Loading.....");
 //        dialog.show();
 
+
         listView.addHeaderView(myHeader, null, false);
 
         if (getArguments() != null) {
@@ -534,17 +535,22 @@ public class PeopleFragment extends Fragment {
                 @Override
                 public boolean onQueryTextChange(String s) {
                     if (!isVisible) {
-                        customAdapterActivity = new CustomAdapterActivity(getActivity(), filterArray(s), "yes");
-                        listView.setAdapter(customAdapterActivity);
-                        listView.setMenuCreator(swipeCreator());
-                        swipeMenuItemClick(filterArray(s));
+                        if(getActivity()!=null){
+                            customAdapterActivity = new CustomAdapterActivity(getActivity(), filterArray(s), "yes");
+                            listView.setAdapter(customAdapterActivity);
+                            listView.setMenuCreator(swipeCreator());
+                            swipeMenuItemClick(filterArray(s));
+                        }
+
 
 
                     } else if (isVisible) {
-                        customAdapterActivity = new CustomAdapterActivity(getActivity(), filterArray(s), "no");
-                        listView.setAdapter(customAdapterActivity);
-                        listView.setMenuCreator(swipeCreator());
-                        swipeMenuItemClick(filterArray(s));
+                        if (getActivity() != null) {
+                            customAdapterActivity = new CustomAdapterActivity(getActivity(), filterArray(s), "no");
+                            listView.setAdapter(customAdapterActivity);
+                            listView.setMenuCreator(swipeCreator());
+                            swipeMenuItemClick(filterArray(s));
+                        }
                     }
                     return false;
                 }

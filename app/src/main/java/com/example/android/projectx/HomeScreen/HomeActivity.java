@@ -19,33 +19,26 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.projectx.CustomModel.UserContactModel;
 import com.example.android.projectx.EditDescriptionActivity;
+import com.example.android.projectx.HomeScreen.NotificationsFragments.NotificationsFragment;
 import com.example.android.projectx.HomeScreen.ProfileFragment.ProfileFragment;
 import com.example.android.projectx.ModelUser;
-import com.example.android.projectx.MyClass;
 import com.example.android.projectx.HomeScreen.PeopleFragments.PeopleFragment;
 import com.example.android.projectx.R;
-import com.example.android.projectx.Reminder.ViewReminderActivity;
 import com.example.android.projectx.SettingsActivity;
 import com.example.android.projectx.WelcomeRegister.WelcomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import java.io.File;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
