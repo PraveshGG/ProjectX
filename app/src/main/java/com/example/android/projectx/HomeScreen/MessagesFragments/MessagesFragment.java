@@ -22,13 +22,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
+import com.example.android.projectx.EditDescription.ModelEditDescription;
 import com.example.android.projectx.HomeScreen.HomeActivity;
-import com.example.android.projectx.EditDescription.ModelUser;
 import com.example.android.projectx.R;
 import com.example.android.projectx.Reminder.ReminderTagModel;
 import com.example.android.projectx.Reminder.SetReminderActivity;
 import com.example.android.projectx.Reminder.ViewSpecificReminderActivity;
-import com.example.android.projectx.WelcomeRegister.SaveReminderModel;
+import com.example.android.projectx.WelcomeRegister.ModelSetReminder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -55,8 +55,8 @@ public class MessagesFragment extends Fragment {
     Boolean isdeleted = true;
     Bitmap bitmap;
     ArrayList<ReminderTagModel> taggedReminderList;
-    ArrayList<SaveReminderModel> deletedReminderList;
-    ArrayList<SaveReminderModel> reminderList;
+    ArrayList<ModelSetReminder> deletedReminderList;
+    ArrayList<ModelSetReminder> reminderList;
     FloatingActionButton fab;
     TextDrawable textDrawable;
     CircleImageView reminderImage;
@@ -91,7 +91,7 @@ public class MessagesFragment extends Fragment {
 
 
 
-        Type type = new TypeToken<ArrayList<SaveReminderModel>>() {
+        Type type = new TypeToken<ArrayList<ModelSetReminder>>() {
         }.getType();
         reminderList = new Gson().fromJson(reminderListString, type);
 
@@ -106,7 +106,7 @@ public class MessagesFragment extends Fragment {
 
 
         deletedReminderList = new Gson().fromJson(sharedPreferences.getString("deletedList", null)
-                , new TypeToken<ArrayList<SaveReminderModel>>() {
+                , new TypeToken<ArrayList<ModelSetReminder>>() {
                 }.getType());
 
         if (deletedReminderList==null) {
@@ -161,7 +161,7 @@ public class MessagesFragment extends Fragment {
                             switch (which) {
                                 case 0:
                                     String reminderListString = sharedPreferences.getString("savedFormData", null);
-                                    Type type = new TypeToken<ArrayList<SaveReminderModel>>() {
+                                    Type type = new TypeToken<ArrayList<ModelSetReminder>>() {
                                     }.getType();
                                     reminderList = new Gson().fromJson(reminderListString, type);
 //
@@ -176,7 +176,7 @@ public class MessagesFragment extends Fragment {
 
                                     String viewReminderList = sharedPreferences.getString("savedFormData", null);
 
-                                    type = new TypeToken<ArrayList<SaveReminderModel>>() {
+                                    type = new TypeToken<ArrayList<ModelSetReminder>>() {
                                     }.getType();
                                     reminderList = new Gson().fromJson(viewReminderList, type);
 
@@ -289,7 +289,7 @@ public class MessagesFragment extends Fragment {
                                     if (model == null || model == "") {
 
                                     } else {
-                                        ModelUser nameUser = new Gson().fromJson(model, ModelUser.class);
+                                        ModelEditDescription nameUser = new Gson().fromJson(model, ModelEditDescription.class);
                                         if (nameUser.getfName() == null || nameUser.getfName() == "") {
                                             firstName = "User";
                                         } else
@@ -337,7 +337,7 @@ public class MessagesFragment extends Fragment {
                 position=position-1;
                 String viewReminderList = sharedPreferences.getString("savedFormData", null);
 
-                Type type = new TypeToken<ArrayList<SaveReminderModel>>() {
+                Type type = new TypeToken<ArrayList<ModelSetReminder>>() {
                 }.getType();
                 reminderList = new Gson().fromJson(viewReminderList, type);
 

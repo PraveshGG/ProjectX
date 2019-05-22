@@ -2,6 +2,8 @@ package com.example.android.projectx.HomeScreen.ProfileFragment;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -15,10 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.projectx.EditDescription.EditDescriptionActivity;
 import com.example.android.projectx.HomeScreen.HomeActivity;
-import com.example.android.projectx.EditDescription.ModelUser;
+import com.example.android.projectx.EditDescription.ModelEditDescription;
 import com.example.android.projectx.R;
 import com.google.gson.Gson;
 
@@ -35,7 +38,7 @@ import static android.app.Activity.RESULT_OK;
  */
 public class ProfileFragment extends Fragment {
 
-    ImageView editDetailsIcon;
+    ImageView editDetailsIcon,addDeleteButtonImage;
     TextView headerName, fullName, age, dob, gender, status, education, birthPlace, currentLocation, bloodType, additionalContacts, work, headerCurrentLocation, headerBirthplace;
     View view;
     CircleImageView headerImageView;
@@ -43,7 +46,7 @@ public class ProfileFragment extends Fragment {
     private static int RESULT_LOAD_IMG = 1;
     Bitmap headerImageBm = null;
     Bundle imagePathBndl;
-    boolean noImage;
+    Boolean hasPP =false;
     Profile mcall;
 
 
@@ -60,7 +63,7 @@ public class ProfileFragment extends Fragment {
 
         imagePathBndl = new Bundle();
 
-
+        addDeleteButtonImage= view.findViewById(R.id.add_delete_button_image);
         headerName = view.findViewById(R.id.name);
         headerImageView = (CircleImageView) view.findViewById(R.id.profile);
         fullName = view.findViewById(R.id.fullname);
@@ -78,53 +81,53 @@ public class ProfileFragment extends Fragment {
         headerBirthplace = view.findViewById(R.id.location);
         headerCurrentLocation = view.findViewById(R.id.designation);
 
+
+
+
+
+
+
+
+        if (!getImage("/profilePic.png").exists()) {
+            hasPP=false;
+            addDeleteButtonImage.setImageResource(R.drawable.add_button);
+        } else {
+            hasPP=true;
+            addDeleteButtonImage.setImageResource(R.drawable.delete_button);
+            File file = getImage("/profilePic.png");
+            String path = file.getAbsolutePath();
+
+            imagePathBndl.putString("imgpth", path);
+            Intent intent = getActivity().getIntent();
+            intent.putExtras(imagePathBndl);
+            mcall.sendimage(path);
+            if (path != null) {
+                headerImageView.setImageBitmap(BitmapFactory.decodeFile(path));
+            }
+
+        }
+
+        addDeleteButtonImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!hasPP){
+                    openGalleryIntent();
+                }else{
+                    deleteImage();
+                }
+            }
+        });
         headerImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                photoPickerIntent.putExtra("crop", "true");
-                photoPickerIntent.putExtra("scale", true);
-                photoPickerIntent.putExtra("outputX", 256);
-                photoPickerIntent.putExtra("outputY", 256);
-                photoPickerIntent.putExtra("aspectX", 1);
-                photoPickerIntent.putExtra("aspectY", 1);
-                photoPickerIntent.putExtra("return-data", true);
-                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+                openGalleryIntent();
 
-                //mcall.sendimage("/storage/emulated/0/profilePic.png");
-//                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-//                dialog.setMessage("sasdf");
-//                dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        Intent j = new Intent(getContext(),HomeActivity.class);
-//                        startActivityForResult(j, requestCode);
-//                    }
-//                });
-//                dialog.show();
             }
         });
 
 
-        if (!getImage("/profilePic.png").exists()) {
 
-            headerImageView.setImageResource(R.drawable.man);
 
-        } else {
-
-                File file = getImage("/profilePic.png");
-                String path = file.getAbsolutePath();
-
-                imagePathBndl.putString("imgpth", path);
-                Intent intent = getActivity().getIntent();
-                intent.putExtras(imagePathBndl);
-                mcall.sendimage(path);
-                if (path != null) {
-                    headerImageView.setImageBitmap(BitmapFactory.decodeFile(path));
-                }
-
-            }
 
 
 
@@ -133,7 +136,7 @@ public class ProfileFragment extends Fragment {
         } else {
             String model = getArguments().getString("model");
 
-            ModelUser user = new Gson().fromJson(model, ModelUser.class);
+            ModelEditDescription user = new Gson().fromJson(model, ModelEditDescription.class);
             if (user.getfName() == null || user.getfName().equals("")) {
                 fullName.setText("N/A");
             } else {
@@ -244,6 +247,33 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    private void deleteImage() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage("Do you want to delete the picture?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getContext(), "Picture deleted.", Toast.LENGTH_SHORT).show();
+                File file = new File("/storage/emulated/0/", "profilePic.png");
+                file.delete();
+                headerImageView.setImageResource(R.drawable.man);
+                addDeleteButtonImage.setImageResource(R.drawable.add_button);
+                hasPP=false;
+                if (getContext() instanceof HomeActivity){
+                    ((HomeActivity)getContext()).notifyDeleted(true);
+                }
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setCancelable(false);
+        builder.show();
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -258,9 +288,10 @@ public class ProfileFragment extends Fragment {
                 headerImageBm = ProfilePic;
                 headerImageView.setImageBitmap(ProfilePic);
                 storeImage(headerImageBm, "profilePic");
-
+                addDeleteButtonImage.setImageResource(R.drawable.delete_button);
                 HomeActivity homeActivity = (HomeActivity) getContext();
                 homeActivity.setImage();
+                hasPP=true;
             }
         }
 
@@ -320,4 +351,19 @@ public class ProfileFragment extends Fragment {
     public interface Profile {
         void sendimage(String imagepath);
     }
+
+    public void openGalleryIntent(){
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        photoPickerIntent.putExtra("crop", "true");
+        photoPickerIntent.putExtra("scale", true);
+        photoPickerIntent.putExtra("outputX", 256);
+        photoPickerIntent.putExtra("outputY", 256);
+        photoPickerIntent.putExtra("aspectX", 1);
+        photoPickerIntent.putExtra("aspectY", 1);
+        photoPickerIntent.putExtra("return-data", true);
+        startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+    }
+
+
 }

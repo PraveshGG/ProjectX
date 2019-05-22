@@ -3,6 +3,7 @@ package com.example.android.projectx.WelcomeRegister;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -30,13 +31,16 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        //call function checkandrqstForPermissions
-        checkAndRequestPermissions();
-
-        //Toast.makeText(this, getUserCountry(WelcomeActivity.this), Toast.LENGTH_SHORT).show();
+        //--CheckAndRequestPermissions ,at least one permission is not granted,return false...
+        //--checkandrequestpermissions, return true for all permissions granted
+        if(checkAndRequestPermissions()){
+            //proceed with normal flow
+        }else{
+            //..check again for requests
+            checkAndRequestPermissions();
+        }
 
         Button continueButton = (Button) findViewById(R.id.button1);
-
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,13 +50,13 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private boolean checkAndRequestPermissions() {
-
+        //..int values 0 for permission granted, -1 for no permission
         int permissionReadContacts = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_CONTACTS);
-        Log.d("permissionReadContactss", "checkAndRequestPermissions: "+permissionReadContacts);
 
         int permissionWriteExternalStorage = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
         int permissionAccessFineLocation = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         List<String> listPermissionsNeeded = new ArrayList<>();
 
@@ -71,14 +75,12 @@ public class WelcomeActivity extends AppCompatActivity {
         }
         return true;
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
 //        Log.d(TAG, "Permission callback called-------");
         switch (requestCode) {
             case REQUEST_ID_MULTIPLE_PERMISSIONS: {
-
                 Map<String, Integer> perms = new HashMap<>();
                 // Initialize the map with both permissions
                 perms.put(Manifest.permission.READ_CONTACTS, PackageManager.PERMISSION_GRANTED);
@@ -93,12 +95,15 @@ public class WelcomeActivity extends AppCompatActivity {
                     if (perms.get(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
                             && perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                             && perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+
 //                        Log.d(TAG, "sms & location services permission granted");
                         // process the normal flow
                         //else any one or both the permissions are not granted
+
+
                     } else {
                         if ((ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_CONTACTS)) && (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) && (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
-                            showDialogOK("Location Serivces and Read Contacts Permission required for this app",
+                            showDialogOK("Location Services, Read Contacts and External Storage permissions are required for this app",
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -187,4 +192,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
     }
+
+
 }

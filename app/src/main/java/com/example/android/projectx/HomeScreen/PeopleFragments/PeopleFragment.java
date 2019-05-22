@@ -3,11 +3,14 @@ package com.example.android.projectx.HomeScreen.PeopleFragments;
 
 import android.app.ProgressDialog;
 import android.app.SearchManager;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -20,6 +23,7 @@ import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.util.TypedValue;
@@ -29,6 +33,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +52,7 @@ import com.example.android.projectx.R;
 import com.example.android.projectx.Reminder.SetReminderActivity;
 import com.example.android.projectx.Retrofit.ApiBase;
 import com.example.android.projectx.Retrofit.ApiService;
+import com.example.android.projectx.ViewSpecificContactActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -70,7 +76,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PeopleFragment extends Fragment {
+public class PeopleFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     SwipeMenuListView listView;
     Boolean isVisible = false;
@@ -81,6 +87,7 @@ public class PeopleFragment extends Fragment {
     Bitmap bitmap;
     String mmContactImage;
     View view;
+    ArrayList<ColorModel> mColor =new ArrayList<>();
     ArrayList<String> storeName = new ArrayList<>();
     ArrayList<MyClass> mmNewContacList, checkList;
     ArrayList<MyClass> a = new ArrayList<>();
@@ -99,7 +106,6 @@ public class PeopleFragment extends Fragment {
     Boolean isFromFragment = false;
     ProgressDialog dialog;
     ArrayList<CheckedListModel> nameNumberList = new ArrayList<CheckedListModel>();
-    int n = 0;
 
 
     public PeopleFragment() {
@@ -151,7 +157,7 @@ public class PeopleFragment extends Fragment {
         listView.setTextFilterEnabled(true);
         listView.setFastScrollEnabled(true);
         listView.setAdapter(customAdapterActivity);
-
+        listView.setOnItemClickListener(this);
 
         // set creator
 
@@ -635,6 +641,9 @@ public class PeopleFragment extends Fragment {
         cursor = getContext().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
 //        retrieveContactPhoto();
 
+
+         //
+
         while (cursor.moveToNext()) {
             bitmap = null;
             name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
@@ -649,7 +658,9 @@ public class PeopleFragment extends Fragment {
                     Log.d("asjdfa", "getView: "+name1);
                     ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
 
+
                     int color = generator.getColor(name1);
+                    mColor.add(new ColorModel(name1,color));
                     TextDrawable drawable1 = TextDrawable.builder()
                             .beginConfig()
                             .fontSize(100)
@@ -885,6 +896,35 @@ public class PeopleFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        position= position -1;
+        startActivity(new Intent(getContext(), ViewSpecificContactActivity.class)
+                .putExtra("phoneNumber",a.get(position).getPhoneNumber())
+                .putExtra("name",a.get(position).getName())
+                .putExtra("colorList",new Gson().toJson(mColor)));
+    }
+
+//    public Bitmap openDisplayPhoto(long contactId) {
+//        Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
+//        Uri displayPhotoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.DISPLAY_PHOTO);
+//
+//
+//        Bitmap photo = null;
+//        try {
+//            AssetFileDescriptor fd =
+//                    getContentResolver().openAssetFileDescriptor(displayPhotoUri, "r");
+//            if(fd.createInputStream()==null){
+//                photo= BitmapFactory.decodeResource(getResources(),
+//                        R.drawable.colorful_pencils);
+//            }else {
+//                photo=BitmapFactory.decodeStream(fd.createInputStream());
+//            }
+//            return photo;
+//        } catch (IOException e) {
+//            return null;
+//        }
+//    }
 }
 
 

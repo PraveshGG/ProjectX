@@ -31,10 +31,11 @@
                         android:padding="@dimen/_8sdp"
                         android:visibility="visible"/>
 
+                <!--android:focusable="false"-->
+                <!--android:focusableInTouchMode="false"-->
+
                 <CheckBox
                     android:id="@+id/contactCheck"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

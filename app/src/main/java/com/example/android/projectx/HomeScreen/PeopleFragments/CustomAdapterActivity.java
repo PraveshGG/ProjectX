@@ -146,7 +146,7 @@ public class CustomAdapterActivity extends ArrayAdapter<MyClass> implements Sect
                     public void onClick(View v) {
 
 //                       finalConvertView.setFocusable(true);
-                        finalConvertView.setFocusableInTouchMode(true);
+                        finalConvertView.setFocusableInTouchMode(false);
 
                         if (finalViewHolder.checkBox.isChecked()) {
                             finalViewHolder.checkBox.setChecked(false);

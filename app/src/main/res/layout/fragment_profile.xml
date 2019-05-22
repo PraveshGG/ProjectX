@@ -42,19 +42,37 @@
                         android:paddingLeft="@dimen/_32ssp"
                         android:layout_marginTop="@dimen/_5sdp">
 
-                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/profile"
+                        <FrameLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="2.2"
-                            android:layout_gravity="center"
-                            android:clickable="true"
-                            android:elevation="5dp"
-                            android:padding="@dimen/_5sdp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/man"
-                            app:civ_border_color="#FFFFFFFF"
-                            app:civ_border_width="3dp" />
+                            android:layout_weight="2.2">
+
+                            <ImageView
+                                android:id="@+id/add_delete_button_image"
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                app:srcCompat="@drawable/delete_button"
+                                android:layout_marginLeft="@dimen/_40sdp"
+                                android:translationZ="10sp"
+                                android:paddingBottom="@dimen/_7sdp"
+                                android:layout_gravity="center_horizontal|bottom"/>
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                xmlns:app="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/profile"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:clickable="true"
+                                android:elevation="5dp"
+                                android:padding="@dimen/_5sdp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/man"
+                                app:civ_border_color="#FFFFFFFF"
+                                app:civ_border_width="3dp" />
+
+
+                        </FrameLayout>
+
                         <TextView
                             android:id="@+id/name"
                             android:layout_width="match_parent"
@@ -120,7 +138,7 @@
                             android:layout_height="0dp"
                             android:layout_weight=".5"
                             android:textSize="@dimen/_14ssp"
-                            android:gravity="center"
+                            android:gravity="center_horizontal"
                             android:text="@string/text_edit"
                             android:textColor="@android:color/white" />
                         <android.support.v4.widget.Space

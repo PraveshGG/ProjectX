@@ -117,7 +117,23 @@
 
 
     </style>
+    <style name="hotelname">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
 
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="hoteladdress">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/black</item>
+
+    </style>
     <style name="style_settings_header">
         <item name="android:paddingLeft">@dimen/_7sdp</item>
         <item name="android:paddingRight">@dimen/_7sdp</item>
@@ -128,6 +144,9 @@
     <style name="divider_style">
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
+    </style>
+    <style name="fontsize">
+        <item name="android:textSize">@dimen/_12ssp</item>
     </style>
 
 </resources>

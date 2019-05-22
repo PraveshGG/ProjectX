@@ -36,19 +36,22 @@
         android:paddingBottom="@dimen/_3sdp"
         android:paddingLeft="@dimen/_13sdp"
         android:paddingRight="@dimen/_13sdp">
+
+
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/country_name_spinner"
             style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/_11sdp"
+            android:paddingBottom="-5dp"
             android:paddingRight="@dimen/_11sdp"
             /> //2.6
 
     </LinearLayout>
 
     <com.lamudi.phonefield.PhoneInputLayout
-        android:id="@+id/country"
+        android:id="@+id/phone_number_input"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight=".8"
@@ -71,7 +74,7 @@
             android:layout_height="match_parent"
             android:layout_weight=".8"/>
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/continue_button2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.4"

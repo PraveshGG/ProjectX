@@ -2,9 +2,12 @@ package com.example.android.projectx.EditDescription;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -44,7 +47,7 @@ public class EditDescriptionActivity extends AppCompatActivity {
     RadioGroup gender;
     RadioButton male, female, other;
     String mmale, mfemale;
-    ModelUser user;
+    ModelEditDescription user;
     String model;
     int getEducationIndex = 0, getRelationshipIndex = 0, getWorkIndex = 0, getBloodIndex = 0;
     SharedPreferences preferences;
@@ -158,7 +161,7 @@ public class EditDescriptionActivity extends AppCompatActivity {
         if (model == null || model == "") {
 
         } else {
-            user = new Gson().fromJson(model, ModelUser.class);
+            user = new Gson().fromJson(model, ModelEditDescription.class);
             firstName.setText(user.getfName());
             middleName.setText(user.getmName());
             lastName.setText(user.getlName());
@@ -262,14 +265,14 @@ public class EditDescriptionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                ModelUser modelUser = new ModelUser(firstName.getText().toString(), middleName.getText().toString(), lastName.getText().toString(),
+                ModelEditDescription modelEditDescription = new ModelEditDescription(firstName.getText().toString(), middleName.getText().toString(), lastName.getText().toString(),
                         dob.getText().toString(), agee.getText().toString(), birthPlace.getText().toString(), designation.getText().toString(),
                         additionalContacts.getText().toString(), mmale, spinner.getSelectedItem().toString(),
                         educationSpinner.getSelectedItem().toString(), bloodSpinner.getSelectedItem().toString(), workSpinner.getSelectedItem().toString());
 
 
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("models", new Gson().toJson(modelUser));
+                editor.putString("models", new Gson().toJson(modelEditDescription));
                 editor.putString("firstName", firstName.getText().toString());
                 editor.commit();
 
@@ -277,7 +280,7 @@ public class EditDescriptionActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 i.putExtra("submitFromEditDescriptionToFragment4", 5);
                 i.putExtra("firstName", firstName.getText().toString());
-//                i.putExtra("model",new Gson().toJson(modelUser));
+//                i.putExtra("model",new Gson().toJson(modelEditDescription));
                 startActivity(i);
             }
         });
@@ -287,13 +290,27 @@ public class EditDescriptionActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, HomeActivity.class));
-        Intent i = new Intent(EditDescriptionActivity.this, HomeActivity.class);
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        i.putExtra("backPressedFromEditDescriptionToFragment4", 5);
+        showDialogOK("Changes will not be saved.\nDo you want to exit?", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        startActivity(new Intent(EditDescriptionActivity.this, HomeActivity.class));
+                        Intent i = new Intent(EditDescriptionActivity.this, HomeActivity.class);
+                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                        i.putExtra("backPressedFromEditDescriptionToFragment4", 5);
 //                i.putExtra("model",new Gson().toJson(modelUser));
-        startActivity(i);
-        super.onBackPressed();
+                        startActivity(i);
+//                        super.onBackPressed();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        // proceed with logic by disabling the related features or quit the app.
+                        break;
+                }
+
+            }
+        });
+
     }
 
     @Override
@@ -316,5 +333,16 @@ public class EditDescriptionActivity extends AppCompatActivity {
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);
+    }
+    private void showDialogOK(String message, DialogInterface.OnClickListener okListener) {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this, R.style.AlertDialogTheme);
+        dialog.setMessage(message);
+        dialog.setPositiveButton("OK", okListener).create();
+        dialog.setNegativeButton("No",okListener).create();
+//        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(COLOR_YOU_WANT);
+//        dialog.create();
+        dialog.setCancelable(false);
+        dialog.show();
     }
 }

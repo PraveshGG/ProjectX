@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Pravesh on 1/9/2018.
  */
 
-public class ModelClass {
+public class ModelPhnNumber {
     @SerializedName("name")
     @Expose
     private String name;

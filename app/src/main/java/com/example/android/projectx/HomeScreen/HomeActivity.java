@@ -25,12 +25,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.projectx.EditDescription.EditDescriptionActivity;
+import com.example.android.projectx.EditDescription.ModelEditDescription;
 import com.example.android.projectx.HomeScreen.MessagesFragments.MessagesFragment;
 import com.example.android.projectx.HomeScreen.NotificationsFragments.NotificationsFragment;
+import com.example.android.projectx.HomeScreen.NotificationsFragments.NotificationsModel.NotificationsMain;
 import com.example.android.projectx.HomeScreen.ProfileFragment.ProfileFragment;
-import com.example.android.projectx.EditDescription.ModelUser;
 import com.example.android.projectx.HomeScreen.PeopleFragments.PeopleFragment;
 import com.example.android.projectx.R;
+import com.example.android.projectx.Retrofit.ApiClient;
+import com.example.android.projectx.Retrofit.ApiService;
 import com.example.android.projectx.Settings.SettingsActivity;
 import com.example.android.projectx.WelcomeRegister.WelcomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,6 +45,9 @@ import com.roughike.bottombar.OnTabSelectListener;
 import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ProfileFragment.Profile {
@@ -64,12 +70,13 @@ public class HomeActivity extends AppCompatActivity
     TextView navHeaderPhoneNumber, navHeaderFirstName;
     SharedPreferences preferences, preferences1,checkFirstAppLaunch;
     DrawerLayout drawer;
-    ModelUser nameUser;
+    ModelEditDescription nameUser;
     String yess;
     Boolean backPressed,whichTabSelected;
     Boolean otherTabSelected =false;
     TextView view;
     Bundle b;
+    int notifSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +92,42 @@ public class HomeActivity extends AppCompatActivity
         preferences = getSharedPreferences("SP", MODE_PRIVATE);
 
 
+//        ApiService notificationsSize = ApiClient.getApiService();
+//        Call<NotificationsMain> callForSize = notificationsSize.getNotifications1();
+//        callForSize.enqueue(new Callback<NotificationsMain>() {
+//            @Override
+//            public void onResponse(Call<NotificationsMain> callForSize, Response<NotificationsMain> response) {
+//                if(response.isSuccessful()){
+//                    notifSize = response.body().getData().size();
+//                }else {
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<NotificationsMain> call, Throwable t) {
+//
+//            }
+//        });
+//
+        ApiService api11 = ApiClient.getApiService();
+        Call<NotificationsMain> call1 = api11.getNotifications1();
+        call1.enqueue(new Callback<NotificationsMain>() {
+            @Override
+            public void onResponse(Call<NotificationsMain> call, Response<NotificationsMain> response) {
+             if(response.isSuccessful()){
+                 notifSize = response.body().getData().size();
+                 notif.setBadgeCount(notifSize);
 
+             }else{
+
+             }
+            }
+            @Override
+            public void onFailure(Call<NotificationsMain> call, Throwable t) {
+
+            }
+        });
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -137,7 +179,8 @@ public class HomeActivity extends AppCompatActivity
         });
 
         notif = findViewById(R.id.tab_notifications);
-        notif.setBadgeCount(5);
+        Log.d("notifSize", "onCreate: "+notifSize);
+
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         navHeaderProfileImage = header.findViewById(R.id.nav_header_profile_image);
@@ -162,7 +205,6 @@ public class HomeActivity extends AppCompatActivity
 
         }else{
             navHeaderProfileImage.setImageResource(R.drawable.man);
-
         }
 //        if (imgPath == null || imgPath == "") {
 //            navHeaderProfileImage.setImageResource(R.drawable.man);
@@ -201,7 +243,7 @@ public class HomeActivity extends AppCompatActivity
         if (model == null || model == "") {
 
         } else {
-            nameUser = new Gson().fromJson(model, ModelUser.class);
+            nameUser = new Gson().fromJson(model, ModelEditDescription.class);
             if (nameUser.getfName() == null || nameUser.getfName() == "") {
                 navHeaderFirstName.setText("User");
 
@@ -384,8 +426,25 @@ public class HomeActivity extends AppCompatActivity
          } else if(id==R.id.nav_settings){
              startActivity(new Intent(this, SettingsActivity.class));
 
-         }
+         }else if(id==R.id.nav_set_reminders)
+         {
+             Handler handler = new Handler();
+             handler.postDelayed(new Runnable() {
+                 @Override
+                 public void run() {
 
+                         Toast.makeText(HomeActivity.this, "people tab", Toast.LENGTH_SHORT).show();
+                         b = new Bundle();
+                         yess= "yes";
+                         b.putString("yes", yess);
+                         peopleFragment.setArguments(b);
+                         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                         ft.replace(R.id.fragmentContainer, peopleFragment);
+                         ft.detach(peopleFragment).attach(peopleFragment).commit();
+                         bottomBar.selectTabAtPosition(0);
+                 }
+             },250);
+         }
         else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -497,5 +556,12 @@ public class HomeActivity extends AppCompatActivity
 
     public void sendSize(int size){
         view.setText(String.valueOf(size));
+    }
+    public void notifyDeleted(Boolean bool){
+        if(bool){
+            File file = new File("/storage/emulated/0/", "profilePic.png");
+            file.delete();
+            navHeaderProfileImage.setImageResource(R.drawable.man);
+        }
     }
 }

@@ -2,15 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:showIn="navigation_view">
+    tools:showIn="navigation_view"
+    >
 
     <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_set_reminders"
+            android:icon="@drawable/set_reminder"
+            android:title="Set Reminders"
+            />
         <item
             android:id="@+id/nav_view_reminders"
             android:icon="@drawable/sale_time"
             android:title="View Reminders"
             app:actionLayout="@layout/counter"
-
             />
         <item
             android:id="@+id/nav_settings"

@@ -3,6 +3,7 @@ package com.example.android.projectx.HomeScreen.NotificationsFragments;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -10,17 +11,21 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.example.android.projectx.HomeScreen.HomeActivity;
 import com.example.android.projectx.HomeScreen.NotificationsFragments.NotificationsModel.NotificationsInfo;
 import com.example.android.projectx.HomeScreen.NotificationsFragments.NotificationsModel.NotificationsMain;
 import com.example.android.projectx.R;
@@ -71,12 +76,10 @@ public class NotificationsFragment extends Fragment  {
          dialog.show();
          ultimateRecyclerView= view.findViewById(R.id.ultimate_recycler_view);
         ultimateRecyclerView.setHasFixedSize(false);
+        ultimateRecyclerView.mRecyclerView.smoothScrollToPosition(0);
 //        linearLayoutManager = new LinearLayoutManager(getContext());
         final ScrollSmoothLineaerLayoutManager mgm = new ScrollSmoothLineaerLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false, 300);
             ultimateRecyclerView.setLayoutManager(mgm);
-
-
-
 
 //        ultimateRecyclerView.setLayoutManager(linearLayoutManager);
 
@@ -89,25 +92,49 @@ public class NotificationsFragment extends Fragment  {
             public void onResponse(Call<NotificationsMain> call, Response<NotificationsMain> response) {
                 if(response.isSuccessful()){
                     List<NotificationsInfo> list = new ArrayList<>();
+
                     for(int i = 0;i<response.body().getData().size();i++){
                         list.add(response.body().getData().get(i));
 
                     }
 
                     simpleRecyclerViewAdapter= new SimpleAdpater(getContext(),list);
+
+
+
                     ultimateRecyclerView.setDefaultOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                         @Override
                         public void onRefresh() {
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    simpleRecyclerViewAdapter.insert(new NotificationsInfo("https://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-                                            "2018-03-25T00:00:00",0000,"Pravesh"+moreNum++,0,true,"2018-03-25T00:00:00"), 0);
-                                    ultimateRecyclerView.setRefreshing(false);
+
+                                    ultimateRecyclerView.setRefreshing(true);
+                                    ApiService api = ApiClient.getApiService();
+                                    Call<NotificationsMain> call = api.getNewerNotifications();
+                                    call.enqueue(new Callback<NotificationsMain>() {
+                                        @Override
+                                        public void onResponse(Call<NotificationsMain> call, Response<NotificationsMain> response) {
+                                            if(response.isSuccessful()){
+                                                if(response.body().getData().isEmpty()){
+                                                    Toast.makeText(getContext(), "No new Notifications", Toast.LENGTH_SHORT).show();
+                                                    ultimateRecyclerView.setRefreshing(false);
+                                                }
+                                            }else {
+
+                                            }
+                                        }
+                                        @Override
+                                        public void onFailure(Call<NotificationsMain> call, Throwable t) {
+                                        }
+                                    });
+
+//                                    simpleRecyclerViewAdapter.insert(new NotificationsInfo("https://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+//                                            "2018-03-25T00:00:00",0000,"Pravesh"+moreNum++,0,true,"2018-03-25T00:00:00"), 0);
                                     //   ultimateRecyclerView.scrollBy(0, -50);
                                     mgm.scrollToPosition(0);
 //                        ultimateRecyclerView.setAdapter(simpleRecyclerViewAdapter);
-//                        simpleRecyclerViewAdapter.notifyDataSetChanged();
+                            simpleRecyclerViewAdapter.notifyDataSetChanged();
                                 }
                             }, 1000);
                         }
@@ -118,9 +145,11 @@ public class NotificationsFragment extends Fragment  {
 //                    mItemTouchHelper = new ItemTouchHelper(callback);
 //                    mItemTouchHelper.attachToRecyclerView(ultimateRecyclerView.mRecyclerView);
 
+                    if (getActivity() != null) {
+                        ultimateRecyclerView.setLoadMoreView(LayoutInflater.from(getActivity())
+                                .inflate(R.layout.custom_bottom_progressbar, null));
+                    }
 
-                    ultimateRecyclerView.setLoadMoreView(LayoutInflater.from(getContext())
-                            .inflate(R.layout.custom_bottom_progressbar, null));
                     ultimateRecyclerView.reenableLoadmore();
                     dialog.dismiss();
                     ultimateRecyclerView.setAdapter(simpleRecyclerViewAdapter);
@@ -149,6 +178,7 @@ public class NotificationsFragment extends Fragment  {
                             }, 1000);
                         }
                     });
+
                 }
             }
 
@@ -162,6 +192,8 @@ public class NotificationsFragment extends Fragment  {
 
         return view;
     }
+
+
 
 
 }

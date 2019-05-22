@@ -4,11 +4,11 @@ package com.example.android.projectx.EditDescription;
  * Created by Pravesh on 1/28/2018.
  */
 
-public class ModelUser {
+public class ModelEditDescription {
 
     String fName,mName,lName, dateOfBirth,age,birthPlace,designation,additionalContacts,gender, status,education,bloodGroup,work;
 
-    public ModelUser(String fName, String mName, String lName, String dateOfBirth, String age, String birthPlace, String designation, String additionalContacts, String gender, String status, String education, String bloodGroup, String work) {
+    public ModelEditDescription(String fName, String mName, String lName, String dateOfBirth, String age, String birthPlace, String designation, String additionalContacts, String gender, String status, String education, String bloodGroup, String work) {
         this.fName = fName;
         this.mName = mName;
         this.lName = lName;
